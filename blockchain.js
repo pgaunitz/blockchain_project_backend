@@ -24,7 +24,7 @@ class Blockchain {
       console.error('Chain is not valid');
       return;
     }
-    console.log('replacing chain with', chain)
+    console.log('replacing chain with', chain);
     this.chain = chain;
   }
 
@@ -34,14 +34,23 @@ class Blockchain {
     }
 
     for (let i = 1; i < chain.length; i++) {
-      const { timestamp, lastHash, hash, data } = chain[i];
+      const { timestamp, lastHash, hash, data, nonce, difficulty } = chain[i];
       const actualLastHash = chain[i - 1].hash;
+      const difficultyDiff = Math.abs(chain[i - 1].difficulty - difficulty);
 
       if (lastHash !== actualLastHash) return false;
 
-      const validatedHash = cryptoHash(timestamp, lastHash, data);
+      const validatedHash = cryptoHash(
+        timestamp,
+        lastHash,
+        data,
+        nonce,
+        difficulty
+      );
 
       if (validatedHash !== hash) return false;
+
+      if (difficultyDiff > 1) return false;
     }
 
     return true;
