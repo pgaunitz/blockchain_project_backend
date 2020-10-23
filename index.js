@@ -12,8 +12,6 @@ const pubsub = new PubSub({ blockchain });
 const DEFUALT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFUALT_PORT}`;
 
-setTimeout(() => pubsub.broadcastChain(), 1000);
-
 app.use(bodyParser.json());
 
 app.get('/api/blocks', (req, res) => {
@@ -54,5 +52,7 @@ const PORT = PEER_PORT || DEFUALT_PORT;
 app.listen(PORT, () => {
   console.log(`listening at localhost:${PORT}`);
 
-  syncChains();
+  if (PORT !== DEFUALT_PORT) {
+    syncChains();
+  }
 });
