@@ -1,9 +1,9 @@
-const { STRATING_BALANCE } = require('../config');
+const { STARTING_BALANCE } = require('../config');
 const { ec, cryptoHash } = require('../util');
 
 class Wallet {
   constructor() {
-    this.balance = STRATING_BALANCE;
+    this.balance = STARTING_BALANCE;
 
     this.keyPair = ec.genKeyPair();
     this.publicKey = this.keyPair.getPublic().encode('hex');
