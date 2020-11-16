@@ -49,7 +49,7 @@ describe('Wallet', () => {
             amount: 999999,
             recipient: 'test-recipient',
           })
-        ).toThrow('Amount exceds balance');
+        ).toThrow('Amount exceeds balance');
       });
     });
 
